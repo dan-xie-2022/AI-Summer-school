@@ -1,2 +1,15 @@
 Data cleaning
+### posts about the steps in data cleaning
 https://www.kaggle.com/search?q=data+cleaning
+### notebooks on kaggle for data cleaning
+https://www.kaggle.com/code/fedi1996/house-prices-data-cleaning-viz-and-modeling
+# This one has some special sections: feature selection, normality check, convert strings to categorical values via LabelEncoder, correlation matrix, feature importance, dimensionality reduction
+# This one also has many tips for visualization of the data cleaning process
+https://www.kaggle.com/code/code1110/houseprice-data-cleaning-visualization
+#textual data
+https://www.kaggle.com/code/ragnisah/text-data-cleaning-tweets-analysis
+
+###some specific functions:
+#Scale and Normalization# https://www.kaggle.com/code/rtatman/data-cleaning-challenge-scale-and-normalize-data
+#Date data# https://www.kaggle.com/code/danxie229/data-cleaning-challenge-parsing-dates/edit
+#Encoding data (binary to readable)# https://www.kaggle.com/code/rtatman/data-cleaning-challenge-character-encodings/notebook
