@@ -16,6 +16,7 @@ https://www.kaggle.com/code/ragnisah/text-data-cleaning-tweets-analysis
 
 
 Data exploration 
+### A comprehensive data explaration:::https://www.kaggle.com/code/pmarcelino/comprehensive-data-exploration-with-python/notebook
 ### What is data exploration:
 #- Discovering early patterns in the data.
 #- Understand the first relationships of the variables.
@@ -200,9 +201,86 @@ data = pd.concat([data, encoded_data], axis=1) ###{for axis 0/’index’, 1/’
 
 
 
+Data split to: training, validation and test
+
+The **train-validation-test** split is a technique for training and evaluating the performance of a machine learning algorithm.
+
+The **procedure** involves taking a dataset and dividing it into three subsets:
+- The **train** subset is used to fit the model and is referred to as the training dataset. You should not evaluate the performance of the model on this train set,
+- The **validation** subset is used to tune hyperparameters of an algorithm. For example the *max_depth* for a regression tree,
+- The **test** subset is not used to train the model; it is only used at the end to evaluate the performances of the model. For a purist, once you 'opened' the test set, you should not modify the model anymore.
 
 
+**Strategy**
+   - Define a test set, and separate the remaining between train and validation.
+   - Generally they represent respectively 70% | 15% | 15% of the initial dataset.
+### dataset1_v1.isin(V2) #check if dataset1_v1 is in V2
 
+
+Splitting your data (Features / Target)
+It is a rather practical approach because generally the algorithms of machine learning ask for the features on the one hand and the target on the other hand.
+
+Step 1: define the feature and the target/label e.g. features = ['V1', 'V2'...'Vn']; target = 'Vt'
+Step 2: select the feature subset and the target subset e.g. features = dataset[features], target = dataset[target]
+
+
+Scaling of Data
+
+Depending on the task at hand, it can be useful to scale each feature by subtracting the mean and dividing it by its standard deviation.
+In practice we often use scikit-learn's standard scaler objects. Note that the test set is scaled with the means and standard deviations 
+calculated on the columns of the training set
+e.g. scale function from sklearn.preprocessing import StandardScaler ### scaler.transform(data) data can be changed flexabily
+
+##Some practical issue in data scale
+
+Data scaling is mainly used to speed up model fitting or improving the performance of some model families such as neural networks or support vector machines.
+
+Other models are not sensitive to scaling like random forests.
+
+In addition to this, scaling data allows to compare the coefficients of a linear model trained on the data and to determine which variables are the most 
+important for the prediction, based on the absolute value of their coefficient.
+
+
+Evaluation Metrics for a Regression Problem
+ In this lab, as we are interested in a regression problem, we will first see some classic regression metrics.
+
+Suppose we evaluate these metrics for a set $(y_i, \hat{y}_i)_{i=1,...n_{\text{test}}}$, where $y_i$ is the true value and   $\hat{y_i}$ is the prediction.
+
+
+- **mean absolute error**:   
+$\text{MAE} = \frac{1}{n_{\text{test}}} \sum_{i=1,...n_{\text{test}}} |y_i - \hat{y_i}|$ .
+
+- **mean squared error**:   
+$\text{MSE} = \frac{1}{n_{\text{test}}} \sum_{i=1,...n_{\text{test}}} (y_i - \hat{y_i})^2$. The most used.
+
+- **max error**: 
+$\text{MAX_Error} =  \max_{i=1,...n_{\text{test}}} (y_i - \hat{y_i})$. Calculates the maximum residual error. It is very sensitive to outliers
+
+MSE has the benefit of penalizing large errors more so can be more appropriate in some cases, for example, if being off by 10 is more than twice as bad as being off by 5.
+
+From an interpretation standpoint, MAE is clearly the winner. MSE does not describe average error alone and has other implications that are more difficult to tease out and understand.
+
+
+Fit a Linear Model on the data
+
+###code to run the regression
+reg = linear_model.LinearRegression()
+reg = reg.fit(train_features, train_target)
+
+Check the Feature importances
+import matplotlib.pyplot as plt
+
+coefs = pd.DataFrame(
+   reg.coef_,
+   columns=['Coefficients'], index=train_features.columns
+)
+
+coefs.plot(kind='barh', figsize=(9, 7))
+plt.title('Linear model')
+plt.axvline(x=0, color='.5')
+plt.subplots_adjust(left=.3)
+
+## Evaluation of predictions
 
 
 
