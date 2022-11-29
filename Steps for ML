@@ -13,3 +13,129 @@ https://www.kaggle.com/code/ragnisah/text-data-cleaning-tweets-analysis
 #Scale and Normalization# https://www.kaggle.com/code/rtatman/data-cleaning-challenge-scale-and-normalize-data
 #Date data# https://www.kaggle.com/code/danxie229/data-cleaning-challenge-parsing-dates/edit
 #Encoding data (binary to readable)# https://www.kaggle.com/code/rtatman/data-cleaning-challenge-character-encodings/notebook
+
+
+Data exploration 
+### What is data exploration:
+#- Discovering early patterns in the data.
+#- Understand the first relationships of the variables.
+#- Initial analysis to discover where to go from here. 
+
+### Why is it important? 
+#- Simplifies future analysis.
+#- Guides data analysis.
+#- Clean up data by removing unnecessary data. 
+
+#Summarize data across groups
+Pandas: dataset.groupby()/dataset.pivot_table()
+#https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html
+Two factors: dataset.pivote_table('DV', index='IV1', columns='IV2')
+Multiple factors: dataset.pivot_table('DV', ['IV1_1', IV1_2], 'IV2')
+Multiple DV: dataset.pivot_table(index='IV1', columns='IV2', aggfunc={'DV1':sum, 'DV2':'mean'})
+# more infomation: https://jakevdp.github.io/PythonDataScienceHandbook/03.09-pivot-tables.html
+$ pandans.cut 实现分组
+
+
+#Box plot are perfect to detect outliers and comapre differents categories
+e.g.
+f, ax = plt.subplots(figsize=(13, 7))
+
+seaborns.boxplot(data=dataset, x='primary_use', y='log_meter_reading', ax=ax)
+ax.set_ylabel('log meter reading (kWh)')
+ax.set_xlabel('Primary usage')
+ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+
+_ = f.suptitle('Meter reading by primary_use', fontsize=20)
+
+#Geo data figure can put data on a map, very useful to visualize geo-data
+e.g.
+
+Step 1: Get the median consumption for each site (while keeping geo position): 
+
+site_median_consumption = (
+    dataset.groupby(['site_id', 'lat', 'lng'])
+    ['log_meter_reading'].median()
+    .reset_index()
+)
+
+Step 2: Plot site median consumption on a map:
+fig = px.scatter_mapbox(
+    site_median_consumption,
+    lat="lat", lon="lng",
+    hover_name="site_id",
+    color='log_meter_reading', size='log_meter_reading',
+    color_discrete_sequence=["fuchsia"], zoom=2, height=300
+)
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+fig.show()
+
+#visualize a time series
+Step 1. Create a numerical variable from date format data
+# create datetime related features to simplify the analysis
+dataset['meter_name'] = dataset.meter.map(dict_meter_name)
+dataset['day'] = dataset.timestamp.dt.day.astype(np.int8)
+dataset['month'] = dataset.timestamp.dt.month.astype(np.int8)
+dataset['hour'] = dataset.timestamp.dt.hour.astype(np.int8)
+dataset['day_of_week'] = dataset.timestamp.dt.dayofweek.astype("int8")
+
+Step 2. map it
+meters_by_hour = (
+    dataset
+    .groupby('hour')
+    .agg({'log_meter_reading': 'median'})
+)
+
+fig, ax = plt.subplots(figsize=(11, 5))
+sns.lineplot(data=meters_by_hour, x="hour", y="log_meter_reading", ax=ax)
+_ = ax.set(title="Time of Day's Meter Reading Distribution")
+
+
+#visualize correlation heatmap
+e.g.
+
+Step 1. define the function
+
+def plot_weather_correlations(data):
+    """Plot the correlations between weather data
+    and the energy consumption.
+    1. select the colum
+    2. get the correlation coefficient
+    3. plot the figure
+    """
+
+    columns_to_show = [
+        "log_meter_reading",
+        "air_temperature",
+        "cloud_coverage",
+        "dew_temperature",
+        "precip_depth_1_hr",
+        "sea_level_pressure",
+        "wind_direction",
+        "wind_speed"
+    ]
+
+    correlations = (
+        data
+        [columns_to_show]
+        .corr(method="spearman")
+    )
+
+    fig, ax = plt.subplots(1, 1, figsize=(10, 9))
+    _ = sns.heatmap(
+        correlations,
+        cmap="coolwarm",
+        vmin=-1,
+        vmax=1,
+        annot=True,
+        ax=ax,
+    )
+    plt.xticks(rotation=45)
+    _ = plt.show()
+
+Step 2. apply the function
+
+plot_weather_correlations(dataset)
+
+feature engineering
+
