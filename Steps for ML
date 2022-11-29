@@ -153,5 +153,61 @@ Step 2. apply the function
 
 plot_weather_correlations(dataset)
 
-feature engineering
+Feature engineering
+
+It is always a good practice to explicitly state the features that we would like to use before training machine learning algorithms.
+
+e.g.
+columns_to_use = [
+ 'Vi', 'V2',...'Vn'
+]
+data = data[columns_to_use]
+
+Feature engineering is the process by which knowledge of data is used to construct explanatory variables, features, that can be used to 
+train a predictive model. Engineering and selecting the correct features for a model will not only significantly improve its predictive power, 
+but will also offer the flexibility to use less complex models that are faster to run and more easily understood.
+
+#Feature Engineering from transformation
+#Feature transformations can include aggregating, combining transforming attributes to create new features. Useful and relevant features 
+will depend on the problem at hand but averages, sums, log or ratios can better expose trends to a model.
+
+#We can also transform a numerical feature into a categorical feature by cutting it into classes. This can be interesting to avoid the impact 
+of outliers or to reduce the variance of the output variable.
+
+Example:
+# log transformation
+data['square_feet_log'] = data['square_feet'].apply(np.log)
+
+# polynomial transformation
+data['air_temperature_squared'] = data['air_temperature']**2
+
+#Some algorithms can't work with categorical data directly. This means that categorical data must be converted to a numerical form. 
+To Convert Categorical Data to Numerical Data, this involves two steps :
+
+Integer (ordinal or cardinal): assign value to each category
+One-Hot Encoding: Create dummy variables ### Use pd.get_dummies() for OneHotEncoding ###You can also use scikitlearn library for OneHotEnding(https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html)
+
+e.g. how to encode to one hot encoding
+# list of columns to encode using One-Hot-Encoding
+columns_to_encode = ["meter_name", "primary_use", "zone_geo", "site_id"]
+
+# encode those columns
+encoded_data = pd.get_dummies(data[columns_to_encode], columns=columns_to_encode)
+
+# add encoded columns to the data
+data = pd.concat([data, encoded_data], axis=1) ###{for axis 0/’index’, 1/’columns’}, default 0}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
