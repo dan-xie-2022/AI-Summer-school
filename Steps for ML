@@ -27,6 +27,20 @@ Data exploration
 #- Guides data analysis.
 #- Clean up data by removing unnecessary data. 
 
+### Reporting NA
+e.g. 
+#define the function to calculate NA in a columns in a dataframe
+def display_missing(df):    
+    for col in df.columns.tolist():          
+        print('{} column missing values: {}'.format(col, df[col].isnull().sum()))
+    print('\n')
+#define the function to use the above function to every dataset in a set of multiple dataset
+for df in dfs:
+    print('{}'.format(df.name))
+    display_missing(df)
+    
+
+
 #Summarize data across groups(version 1)
 Pandas: dataset.groupby()/dataset.pivot_table()
 #https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html
@@ -155,6 +169,24 @@ Step 2. apply the function
 plot_weather_correlations(dataset)
 
 Feature engineering
+
+It is divided into 3 broad categories:
+
+Feature Selection: All features aren't equal. It is all about selecting a small subset of features from a large pool of features. 
+We select those attributes which best explain the relationship of an independent variable with the target variable. 
+There are certain features which are more important than other features to the accuracy of the model. It is different 
+from dimensionality reduction because the dimensionality reduction method does so by combining existing attributes, 
+whereas the feature selection method includes or excludes those features. The methods of Feature Selection are 
+Chi-squared test, correlation coefficient scores, LASSO, Ridge regression etc.
+
+Feature Transformation: It means transforming our original feature to the functions of original features. Scaling, discretization,
+binning and filling missing data values are the most common forms of data transformation. To reduce right skewness of the data, we use log.
+
+Feature Extraction: When the data to be processed through an algorithm is too large, it’s generally considered redundant. 
+Analysis with a large number of variables uses a lot of computation power and memory, therefore we should reduce the dimensionality of these types of variables. 
+It is a term for constructing combinations of the variables. For tabular data, we use PCA to reduce features. For image, we can use line or edge detection.
+
+
 
 It is always a good practice to explicitly state the features that we would like to use before training machine learning algorithms.
 
