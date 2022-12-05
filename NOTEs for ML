@@ -1,0 +1,13 @@
+XGBOOST
+#https://towardsdatascience.com/a-brief-introduction-to-xgboost-3eaee2e3e5d6#:~:text=XGBoost%20vs%20Gradient%20Boosting,can%20be%20parallelized%20across%20clusters.
+
+When to use XGBoost?
+When there is a larger number of training samples. Ideally, greater than 1000 training samples and less 100 features or we can say when the number of features < number of training samples.
+When there is a mixture of categorical and numeric features or just numeric features.
+
+When not to use XGBoost?
+Image Recognition
+Computer Vision
+When the number of training samples is significantly smaller than the number of features.
+
+
