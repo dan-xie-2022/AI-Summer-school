@@ -1,6 +1,11 @@
 XGBOOST
 #https://towardsdatascience.com/a-brief-introduction-to-xgboost-3eaee2e3e5d6#:~:text=XGBoost%20vs%20Gradient%20Boosting,can%20be%20parallelized%20across%20clusters.
 
+XGBoost vs Gradient Boosting
+XGBoost is a more regularized form of Gradient Boosting. XGBoost uses advanced regularization (L1 & L2), which improves model generalization capabilities.
+
+XGBoost delivers high performance as compared to Gradient Boosting. Its training is very fast and can be parallelized across clusters.
+
 When to use XGBoost?
 When there is a larger number of training samples. Ideally, greater than 1000 training samples and less 100 features or we can say when the number of features < number of training samples.
 When there is a mixture of categorical and numeric features or just numeric features.
@@ -10,4 +15,8 @@ Image Recognition
 Computer Vision
 When the number of training samples is significantly smaller than the number of features.
 
+Does RF AL have the problem of overfitting?
+#One opinions: https://mljar.com/blog/random-forest-overfitting/
 
+Model stacking
+#blog to introduce the concept: https://medium.com/geekculture/how-to-use-model-stacking-to-improve-machine-learning-predictions-d113278612d4#:~:text=What%20is%20Model%20Stacking%3F,model%20called%20a%20meta%2Dlearner.
