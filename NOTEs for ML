@@ -20,3 +20,66 @@ Does RF AL have the problem of overfitting?
 
 Model stacking
 #blog to introduce the concept: https://medium.com/geekculture/how-to-use-model-stacking-to-improve-machine-learning-predictions-d113278612d4#:~:text=What%20is%20Model%20Stacking%3F,model%20called%20a%20meta%2Dlearner.
+
+
+Neural networks
+### https://www.ibm.com/cloud/learn/neural-networks#:~:text=Neural%20networks%2C%20also%20known%20as,neurons%20signal%20to%20one%20another.
+Neural networks, also known as artificial neural networks (ANNs) or simulated neural networks (SNNs), are a subset of machine learning and are 
+at the heart of deep learning algorithms. Their name and structure are inspired by the human brain, mimicking the way that biological neurons 
+signal to one another.
+
+Artificial neural networks (ANNs) are comprised of a node layers, containing an input layer, one or more hidden layers, and an output layer. 
+Each node, or artificial neuron, connects to another and has an associated weight and threshold. If the output of any individual node is above 
+the specified threshold value, that node is activated, sending data to the next layer of the network. Otherwise, no data is passed along 
+to the next layer of the network.
+
+Neural networks rely on training data to learn and improve their accuracy over time. However, once these learning algorithms are fine-tuned for 
+accuracy, they are powerful tools in computer science and artificial intelligence, allowing us to classify and cluster data at a high velocity. 
+Tasks in speech recognition or image recognition can take minutes versus hours when compared to the manual identification by human experts. 
+One of the most well-known neural networks is Google’s search algorithm.
+
+Feedforward V.S. Backpropogation
+Most deep neural networks are feedforward, meaning they flow in one direction only, from input to output. However, you can also train 
+your model through backpropagation; that is, move in the opposite direction from output to input. Backpropagation allows us to calculate 
+and attribute the error associated with each neuron, allowing us to adjust and fit the parameters of the model(s) appropriately.
+
+Different types of Neural Network
+1. multi-layer perceptrons (MLPs/ANN, ), They are comprised of an input layer, a hidden layer or layers, and an output layer. 
+While these neural networks are also commonly referred to as MLPs, it’s important to note that they are actually comprised of sigmoid neurons, 
+not perceptrons, as most real-world problems are nonlinear. Data usually is fed into these models to train them, and they are the foundation 
+for computer vision, natural language processing, and other neural networks.
+
+2. Convolutional neural networks (CNNs) are similar to feedforward networks, but they’re usually utilized for image recognition, 
+pattern recognition, and/or computer vision. These networks harness principles from linear algebra, particularly matrix multiplication, 
+to identify patterns within an image.
+
+In other words, it would be expensive. Compared to its predecessors, the main advantage of CNN is that it automatically detects the 
+important features without any human supervision. This is why CNN would be an ideal solution to computer vision and image classification problems.
+Read more at: https://viso.ai/deep-learning/ann-and-cnn-analyzing-differences-and-similarities/
+
+In general, CNN tends to be a more powerful and 
+accurate way of solving classification problems. ANN is still dominant for problems where datasets are limited, and image inputs are not necessary.
+Read more at: https://viso.ai/deep-learning/ann-and-cnn-analyzing-differences-and-similarities/
+
+
+
+ANN is ideal for solving problems regarding data. Forward-facing algorithms can easily be used to process image data, 
+text data, and tabular data. CNN requires many more data inputs to achieve its novel high accuracy rate.
+Read more at: https://viso.ai/deep-learning/ann-and-cnn-analyzing-differences-and-similarities/
+
+3. Recurrent neural networks (RNNs) are identified by their feedback loops. These learning algorithms are primarily leveraged when 
+using time-series data to make predictions about future outcomes, such as stock market predictions or sales forecasting.
+
+RNN models are widely used in Natural Language Processing (NLP) due to the superiority of processing the data with an input length that is not fixed. 
+The task of the AI here is to build a system that can comprehend natural language spoken by humans, e.g., natural language modeling, word embedding, 
+and machine translation.
+Read more at: https://viso.ai/deep-learning/deep-neural-network-three-popular-types/
+
+For more infromation: 
+1. https://viso.ai/deep-learning/deep-neural-network-three-popular-types/#:~:text=Three%20following%20types%20of%20deep,Recurrent%20Neural%20Networks%20(RNN)
+2. (demonstration of different network and introduction of when to use it)https://www.analyticsvidhya.com/blog/2020/02/cnn-vs-rnn-vs-mlp-analyzing-3-types-of-neural-networks-in-deep-learning/
+
+
+
+
+
