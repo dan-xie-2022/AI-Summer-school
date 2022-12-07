@@ -1,3 +1,6 @@
+Data Science Glossary on Kaggle
+https://www.kaggle.com/code/shivamb/data-science-glossary-on-kaggle
+
 Data cleaning
 ### posts about the steps in data cleaning
 https://www.kaggle.com/search?q=data+cleaning
@@ -169,6 +172,94 @@ Step 2. apply the function
 plot_weather_correlations(dataset)
 
 Feature engineering
+
+Feature engineering 
+###data.describe() = data.summary
+How to select features and what are Benefits of performing feature selection before modeling your data?
+
+· Reduces Overfitting : Less redundant data means less opportunity to make decisions based on noise.
+· Improves Accuracy : Less misleading data means modeling accuracy improves.
+· Reduces Training Time : fewer data points reduce algorithm complexity and algorithms train faster.
+
+5 Feature selection techniques that are easy to use and also gives good results.
+
+1. Univariate Selection
+
+#data.iloc() slicing columns
+Statistical tests can be used to select those features that have the strongest relationship with the output variable. The scikit-learn library provides the SelectKBest class that can be used with a suite of different statistical tests to select a specific number of features.
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
+###prepare data
+X = data.iloc[:,0:20]  #independent columns
+y = data.iloc[:,-1]    #target column i.e price range
+#apply SelectKBest class to extract top 10 best features
+bestfeatures = SelectKBest(score_func=chi2, k=10)
+fit = bestfeatures.fit(X,y)
+dfscores = pd.DataFrame(fit.scores_)
+dfcolumns = pd.DataFrame(X.columns)
+#concat two dataframes for better visualization 
+featureScores = pd.concat([dfcolumns,dfscores],axis=1)
+featureScores.columns = ['Specs','Score']  #naming the dataframe columns
+print(featureScores.nlargest(10,'Score'))  #print 10 best features
+
+#Other statistical tests can be used, especially when the features are not strictly positive, in particular F-tests.
+
+2. Feature Importance
+Feature importance gives you a score for each feature of your data, the higher the score more important or relevant is the feature towards your output variable.
+Feature importance is an inbuilt class that comes with Tree Based Classifiers, we will be using Extra Tree Classifier for extracting the top 10 features for the dataset.
+
+from sklearn.ensemble import ExtraTreesClassifier
+import matplotlib.pyplot as plt
+model = ExtraTreesClassifier()
+model.fit(X,y)
+print(model.feature_importances_) #use inbuilt class feature_importances of tree based classifiers
+#plot graph of feature importances for better visualization
+feat_importances = pd.Series(model.feature_importances_, index=X.columns)
+feat_importances.nlargest(10).plot(kind='barh')
+plt.show()
+
+3. Recursive Feature Selection
+The Recursive Feature Elimination (or RFE) works by recursively removing attributes and building a model on those attributes that remain.
+It uses the model accuracy to identify which attributes (and combination of attributes) contribute the most to predicting the target attribute.
+The example below uses RFE with the logistic regression algorithm to select the top 3 features. The choice of algorithm does not matter too much as long as it is skillful and consistent.
+
+from numpy import mean
+from numpy import std
+from sklearn.datasets import make_classification
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import RepeatedStratifiedKFold
+from sklearn.feature_selection import RFE
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.pipeline import Pipeline
+
+array = data.values
+X = array[:,0:20]
+y = array[:,20]
+rfe = RFE(estimator=DecisionTreeClassifier(), n_features_to_select=5)
+model = DecisionTreeClassifier()
+pipeline = Pipeline(steps=[('s',rfe),('m',model)])
+# evaluate model
+cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
+n_scores = cross_val_score(pipeline, X, y, scoring='accuracy', cv=cv, n_jobs=-1, error_score='raise')
+# report performance
+print('Accuracy: %.3f (%.3f)' % (mean(n_scores), std(n_scores)))
+
+fit = rfe.fit(X, y)
+print("Num Features: %d" % fit.n_features_)
+print("Selected Features: %s" % fit.support_)
+print("Feature Ranking: %s" % fit.ranking_)
+#Note: Your results may vary given the stochastic nature of the algorithm or evaluation procedure, or differences in numerical precision. 
+Consider running the example a few times and compare the average outcome.
+
+
+4.Principal Component Analysis
+5.Correlation Matrix with Heatmap
+
+Let’s have a look at these techniques one by one with an example
+
+###more detialed information
+#https://www.kaggle.com/code/piyushagni5/feature-selection-techniques-in-machine-learning
+
 
 It is divided into 3 broad categories:
 
