@@ -80,6 +80,16 @@ For more infromation:
 2. (demonstration of different network and introduction of when to use it)https://www.analyticsvidhya.com/blog/2020/02/cnn-vs-rnn-vs-mlp-analyzing-3-types-of-neural-networks-in-deep-learning/
 
 
+Regularization
+Two regularization methods for Linear models:  Lasso and Ridge.
 
+Lasso can set some coefficients to zero, thus performing variable selection, while ridge regression cannot.
+Both methods allow to use correlated predictors, but they solve multicollinearity issue differently:
+
+In ridge regression, the coefficients of correlated predictors are similar. Ridge works well if there 
+are many large parameters of about the same value (when most predictors impact the response).
+
+In lasso, one of the correlated predictors has a larger coefficient, while the rest are (nearly) zero. 
+Lasso tends to do well if there are a small number of significant parameters and the others are close to zero
 
 
