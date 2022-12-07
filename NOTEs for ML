@@ -92,4 +92,42 @@ are many large parameters of about the same value (when most predictors impact t
 In lasso, one of the correlated predictors has a larger coefficient, while the rest are (nearly) zero. 
 Lasso tends to do well if there are a small number of significant parameters and the others are close to zero
 
+-Lasso is good when you have a few features with high predicting power while the others are useless: 
+it will zero out the useless ones and keep only a subset of the variables.
+
+-Ridge is good when the predicting power of your dataset is spread out over the different features: 
+it will not zero out features that could be helpful when making predictions but will simply reduce the weight of most variables in the model.
+
+In practice, this is often hard to determine. Thus, the best way is see what is the best MSE you can get on the val set using different values of lambda.
+
+Elastic Net model
+Elastic Net first emerged as a result of critique on lasso, whose variable selection can be too dependent on data and thus unstable. 
+The solution is to combine the penalties of ridge regression and lasso to get the best of both worlds. Elastic Net aims at minimizing 
+the following loss function:
+
+Let's choose an 𝜆1,𝜆2 ∈[0,+inf] :
+
+We want to minimize
+
+𝑚𝑖𝑛𝛽[∑𝑛𝑖=1(𝑦𝑖−𝑋𝑖𝛽)2+𝜆1||𝑋||2+𝜆2||𝑋||22 ]
+
+The most common method to find a good model for a given use case usually consists in:
+- training various models on a training set
+- comparing their performance on a validation set
+- finally, check whether the best models generalize properly on new data by comparing their predictions on a test set, which serves as a common benchmark.
+
+However, this may limitate the comparability of models and lead to erroneous conclusions, as the performance of a given algorithm may depend on the training data, 
+and sometimes change even if the training data remains the same (this happens when some model parameters or input are initialized randomly).
+
+In order to mitigate this risk, one might resort to cross-validation:
+- the dataset is only divised into two parts: a training and a test set
+- the training set is divided into N parts, and we're going to train N distinct models (with identical hyperparameters though)
+- each model will be trained on N-1 parts (or folds) of the training set, and its performance will be assessed on the remaining fold
+- at the end, we average the performance of the model obtained on the N validation games.
+
+
+
+
+
+
 
