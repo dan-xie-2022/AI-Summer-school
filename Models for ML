@@ -126,6 +126,9 @@ In order to mitigate this risk, one might resort to cross-validation:
 - at the end, we average the performance of the model obtained on the N validation games.
 
 
+Hyperparameter tunning
+#For more info: https://www.kaggle.com/code/pavansanagapati/automated-hyperparameter-tuning
+
 
 
 
