@@ -84,6 +84,20 @@ _ = f.suptitle('Meter reading by primary_use', fontsize=20)
 #Geo data figure can put data on a map, very useful to visualize geo-data
 e.g.
 
+###boxplot could also be used to detect outliners, see more visualization:
+
+# Box plots for all our numeric features
+sns.set_style("white")
+f, ax = plt.subplots(figsize=(8, 7))
+ax.set_xscale("log")
+ax = sns.boxplot(data=features[numerics2] , orient="h", palette="Set1")
+# Tweak the visual presentation
+ax.xaxis.grid(False)
+ax.set(ylabel="Feature names")
+ax.set(xlabel="Numeric values")
+ax.set(title="Numeric Distribution of Features")
+sns.despine(trim=True, left=True)
+
 Step 1: Get the median consumption for each site (while keeping geo position): 
 
 site_median_consumption = (
