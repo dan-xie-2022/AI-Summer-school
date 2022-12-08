@@ -129,8 +129,7 @@ In order to mitigate this risk, one might resort to cross-validation:
 Hyperparameter tunning
 #For more info: https://www.kaggle.com/code/pavansanagapati/automated-hyperparameter-tuning
 
-
-
-
+SVM:
+Mathmetical explanation: https://www.youtube.com/watch?v=ny1iZ5A8ilA
 
 
