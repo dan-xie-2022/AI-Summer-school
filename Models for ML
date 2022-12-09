@@ -79,6 +79,16 @@ For more infromation:
 1. https://viso.ai/deep-learning/deep-neural-network-three-popular-types/#:~:text=Three%20following%20types%20of%20deep,Recurrent%20Neural%20Networks%20(RNN)
 2. (demonstration of different network and introduction of when to use it)https://www.analyticsvidhya.com/blog/2020/02/cnn-vs-rnn-vs-mlp-analyzing-3-types-of-neural-networks-in-deep-learning/
 
+GNN
+GNN, or Graph Neural Network, is a type of machine learning algorithm that is designed to work with graph-structured data. Graphs are a commonly
+used data structure in many fields, including social networks, molecular chemistry, and natural language processing, and GNNs are well-suited for
+working with this type of data.
+
+GNNs have a wide range of applications, including predicting the structure of proteins, detecting fraudulent behavior in financial networks, 
+and recommending products or content to users. They are a powerful tool for working with graph-structured data, and are widely used in many 
+different fields.
+More info: 
+1.https://www.datacamp.com/tutorial/comprehensive-introduction-graph-neural-networks-gnns-tutorial
 
 Regularization
 Two regularization methods for Linear models:  Lasso and Ridge.
