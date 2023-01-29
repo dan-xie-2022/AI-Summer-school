@@ -2,3 +2,6 @@
 features_to_encode = list(X_train.select_dtypes(include = ['object']).columns) 
 # Or alternatively, 
 features_to_encode = X_train.columns[X_train.dtypes==object].tolist()
+
+A good post for handling the categorical features
+https://medium.com/analytics-vidhya/handle-missing-values-in-categorical-features-b7c5b073dda2
